@@ -1,0 +1,49 @@
+﻿@page "/"
+@* @rendermode InteractiveServer *@
+
+<EditForm Model="Form" OnValidSubmit="Submit" FormName="the-form">
+    
+    <DataAnnotationsValidator />
+    
+    <label class="form-label">Open Account Sent</label>
+    <InputDate @bind-Value="Form.OpenAcctSent" class="form-control" />
+    <br>
+
+    <ValidationSummary />
+    <br />
+    
+    <div class="btn-group" role="group">
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </div>
+</EditForm>
+
+@code {
+
+    [SupplyParameterFromForm] public CreateForm? Form { get; set; }
+
+    public class CreateForm
+    {
+        public DateTime? OpenAcctSent { get; set; }
+    }
+
+    protected override void OnInitialized()
+    {
+        if (Form == null)
+        {
+            Form = new();
+        }
+    }
+
+    protected void Submit()
+    {
+        if (Form.OpenAcctSent == null)
+        {
+            Console.WriteLine("null");
+        }
+        else
+        {
+            Console.WriteLine(Form.OpenAcctSent);
+        }
+    }
+
+}
